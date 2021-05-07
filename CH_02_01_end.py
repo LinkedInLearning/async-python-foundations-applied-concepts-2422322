@@ -22,7 +22,7 @@ urls = [
 ]
 
 
-async def fetch(session, url):
+async def fetch_args(session, url):
     async with session.get(url) as response:
         data = await response.json()
         return data["args"]
@@ -33,7 +33,7 @@ start = datetime.now()
 
 async def main():
     async with aiohttp.ClientSession() as session:
-        data = await asyncio.gather(*[fetch(session, url) for url in urls])
+        data = await asyncio.gather(*[fetch_args(session, url) for url in urls])
         pp(data)
 
 
