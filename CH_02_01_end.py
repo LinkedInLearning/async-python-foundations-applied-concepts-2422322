@@ -28,9 +28,6 @@ async def fetch_args(session, url):
         return data["args"]
 
 
-start = datetime.now()
-
-
 async def main():
     async with aiohttp.ClientSession() as session:
         data = await asyncio.gather(*[fetch_args(session, url) for url in urls])
@@ -38,5 +35,6 @@ async def main():
 
 
 loop = asyncio.get_event_loop()
+start = datetime.now()
 loop.run_until_complete(main())
 click.secho(f"{datetime.now()-start}", bold=True, bg="blue", fg="white")
