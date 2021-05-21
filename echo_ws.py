@@ -1,9 +1,11 @@
 import asyncio
 import websockets
 
+
 async def echo(websocket, path):
     async for message in websocket:
         await websocket.send(message)
+
 
 start_server = websockets.serve(echo, "localhost", 8765)
 
