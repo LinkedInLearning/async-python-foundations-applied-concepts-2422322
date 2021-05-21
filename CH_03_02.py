@@ -14,12 +14,16 @@ async def main():
     first_item = await redis.hget("item:1", "name", encoding="utf-8")
     first_item_price = await redis.hget("item:1", "price", encoding="utf-8")
     items = await redis.hscan("name")
+    items = await redis.hscan("item:1")
     print(items)
 
     click.secho(f"    {restaurant}   ", fg="cyan", bold=True, bg="yellow")
     click.secho(f"  {first_item} | ${first_item_price} ", fg="cyan")
     redis.close()
     await redis.wait_closed()
-
+"""
+for item in r.scan_iter(match="item:*"):
+    print(r.hgetall(item))
+"""
 
 asyncio.run(main())
