@@ -14,7 +14,8 @@ async def main():
     print(await asyncio.gather(sleep_and_print(3), sleep_and_print(6)))
 
 
-loop = asyncio.get_event_loop()
+# loop = asyncio.get_event_loop()
 start = datetime.now()
-loop.run_until_complete(main())
+# loop.run_until_complete(main())
+asyncio.run(main())
 click.secho(f"{datetime.now()-start}", bold=True, bg="blue", fg="white")
