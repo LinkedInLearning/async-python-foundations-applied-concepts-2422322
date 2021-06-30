@@ -1,8 +1,9 @@
 from datetime import datetime
 from pprint import pp
+import asyncio
 
+import aiohttp
 import click
-import requests
 
 urls = [
     "http://httpbin.org/get?text=python",
@@ -20,10 +21,19 @@ urls = [
 ]
 
 
-def get_args(url):
-    return requests.get(url).json()["args"]
+async def fetch_args(session, url):
+    async with session.get(url) as response:
+        data = await response.json()
+        return data["args"]
 
 
+async def main():
+    async with aiohttp.ClientSession() as session:
+        data = await asyncio.gather(*[fetch_args(session, url) for url in urls])
+        pp(data)
+
+
+loop = asyncio.get_event_loop()
 start = datetime.now()
-pp([get_args(url) for url in urls])
+loop.run_until_complete(main())
 click.secho(f"{datetime.now()-start}", bold=True, bg="blue", fg="white")

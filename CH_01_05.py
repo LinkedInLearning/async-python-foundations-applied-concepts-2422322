@@ -3,19 +3,19 @@ from datetime import datetime
 import click
 
 
-async def sleep_and_print(seconds):
-    print(f"starting async {seconds} sleep 😴")
-    await asyncio.sleep(seconds)
-    print(f"finished async {seconds} sleep ⏰")
-    return seconds
+async def sleep_five():
+    pass  # your code here
+
+
+async def sleep_three_then_five():
+    pass  # your code here
 
 
 async def main():
-    print(await asyncio.gather(sleep_and_print(3), sleep_and_print(6)))
+    results = "your code"
+    print(results)
 
 
-# loop = asyncio.get_event_loop()
 start = datetime.now()
-# loop.run_until_complete(main())
 asyncio.run(main())
 click.secho(f"{datetime.now()-start}", bold=True, bg="blue", fg="white")
