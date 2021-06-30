@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Chat App</title>
+     <!-- Google Fonts -->
+     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+     <!-- CSS Reset -->
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
+     <!-- Milligram CSS -->
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.css"> 
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+                <div class="column">
+                <h1>Chat</h1>
+                <table id="chat">
+                        <tbody>
+                            <tr>
+                            </tr> 
+                        </tbody>
+                <label for="handle">Your name:</label>
+                <form id="send-message" onsubmit="event.preventDefault();"">
+                    <input id="handle" type="text" placeholder="handle">
+                    <input id="message" type="text" placeholder="message">
+                    <input type="submit" value="Send"/>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script>
+    const wsProtocol = window.location.protocol === "https:"? "wss" : "ws";
+    const ws = new WebSocket(`${wsProtocol}://${window.location.host}/ws`)
+    const sendMessageFrm = document.querySelector('#send-message');
+    function appendMessage (m) {
+        console.log(m.data);
+        const message = JSON.parse(m.data);
+        const tr = document.createElement('tr')
+        const handleEl = document.createElement('td')
+        handleEl.appendChild(document.createTextNode(message.handle))
+        const messageEl = document.createElement('td')
+        messageEl.appendChild(document.createTextNode(message.message))
+    
+        tr.append(handleEl);
+        tr.append(messageEl);
+        const tbody = document.querySelector('tbody');
+        tbody.appendChild(tr);
+    }
+    function sendMessage (e) {
+        e.preventDefault();
+        const handle = document.querySelector("#handle").value;
+        const message = document.querySelector("#message").value;
+        ws.send(JSON.stringify({handle, message}));    
+    }
+    ws.onmessage = appendMessage
+
+    sendMessageFrm.addEventListener("submit", sendMessage);
+    </script>
+</body>
+</html>
