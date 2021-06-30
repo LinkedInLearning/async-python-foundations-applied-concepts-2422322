@@ -1,22 +1,26 @@
 import asyncio
 from datetime import datetime
+from asyncio.coroutines import coroutine
 import click
 import time
 
 
-def sleep_and_print(seconds):
+async def sleep_and_print(seconds):
     print(f"starting async {seconds} sleep 😴")
     await asyncio.sleep(seconds)
     print(f"finished async {seconds} sleep ⏰")
-    await time.sleep(1)
     return seconds
 
 
 async def main():
-    print(await asyncio.gather(sleep_and_print(3), sleep_and_print(6)))
-asyncio.run(sleep_and_print(2))
+    results = await asyncio.gather(sleep_and_print(3), sleep_and_print(6))
+    coroutines = []
+    for i in range(1, 11):
+        coroutines.append(sleep_and_print(i))
+    results = await asyncio.gather(*coroutines)
+    print(results)
 
-# loop = asyncio.get_event_loop()
-# start = datetime.now()
-# loop.run_until_complete(main())
-# click.secho(f"{datetime.now()-start}", bold=True, bg="blue", fg="white")
+
+start = datetime.now()
+asyncio.run(main())
+click.secho(f"{datetime.now()-start}", bold=True, bg="blue", fg="white")

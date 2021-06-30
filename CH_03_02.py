@@ -16,13 +16,15 @@ async def main():
     items = await redis.hscan("name")
     items = await redis.hscan("item:1")
     await redis.publish_json("feed", {"name": "Beverage", "price": 3})
-    
+
     print(items)
 
     click.secho(f"    {restaurant}   ", fg="cyan", bold=True, bg="yellow")
     click.secho(f"  {first_item} | ${first_item_price} ", fg="cyan")
     redis.close()
     await redis.wait_closed()
+
+
 """
 import redis
 r = redis.Redis(host='localhost', port=6379, db=0)
