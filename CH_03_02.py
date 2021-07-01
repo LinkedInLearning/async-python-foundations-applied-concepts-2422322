@@ -4,34 +4,45 @@ import click
 import json
 
 
+class Chat:
+    def __init__(self, room_name):
+        self.room_name = room_name
+
+    async def start_db(self):
+        self.redis = await aioredis.create_redis_pool("redis://localhost")
+        await self.redis.set("room_name", self.room_name)
+
+    async def save_message(self, message_dictionary):
+        room_name = await self.redis.get("room_name")
+        message_json = json.dumps(message_dictionary)
+        await self.redis.rpush(room_name, message_json)
+
+    async def clear_db(self):
+        await self.redis.flushall()
+
+    async def get_all_messages(self):
+        room_name = await self.redis.get("room_name")
+        message_jsons = await self.redis.lrange(room_name, 0, -1, encoding="utf-8")
+        messages = []
+        for message in message_jsons:
+            message_dictionary = json.loads(message)
+            messages.append(message_dictionary)
+        return messages
+
+
 async def main():
-    redis = await aioredis.create_redis_pool("redis://localhost")
-    await redis.flushall()
-    await redis.set("app", "Chat")
-    await redis.rpush("chat", json.dumps({"handle": "first_user", "message": "hey"}))
-    await redis.rpush(
-        "chat", json.dumps({"handle": "second_user", "message": "What's up?"})
-    )
-    await redis.rpush(
-        "chat", json.dumps({"handle": "first_user", "message": "all good!"})
-    )
+    chat_db = Chat("messages")
+    await chat_db.start_db()
+    await chat_db.save_message({"handle": "first_user", "message": "hey"})
+    await chat_db.save_message({"handle": "first_user", "message": "hey"})
+    await chat_db.save_message({"handle": "second_user", "message": "What's up?"})
+    await chat_db.save_message({"handle": "first_user", "message": "all good!"})
 
-    app_name = await redis.get("app", encoding="utf-8")
-    click.secho(f" {app_name} ", fg="cyan", bold=True, bg="yellow")
-    await redis.publish_json("feed", {"name": "Beverage", "price": 3})
-    chat_messages = await redis.lrange("chat", 0, -1, encoding="utf-8")
+    chat_messages = await chat_db.get_all_messages()
+
+    click.secho(f" Chat ", fg="cyan", bold=True, bg="yellow")
     for message in chat_messages:
-        message = json.loads(message)
         click.secho(f'  {message["handle"]} | {message["message"]} ', fg="cyan")
-    redis.close()
-    await redis.wait_closed()
-
-
-"""
-import redis
-r = redis.Redis(host='localhost', port=6379, db=0)
-for item in r.scan_iter(match="item:*"):
-    print(r.hgetall(item))
-"""
+    await chat_db.clear_db()
 
 asyncio.run(main())

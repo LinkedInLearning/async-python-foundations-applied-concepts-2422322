@@ -21,9 +21,10 @@
                         <tbody>
                             {% for message in messages %}
                             <tr>
-                                <td>{{message.handle|e }}</td>
-                                <td>{{message.message|e }}</td>
+                                <td>{{message.handle }}</td>
+                                <td>{{message.message }}</td>
                             </tr>
+                            {% else %}
                             {% endfor %}
                             <tr>
                             </tr> 

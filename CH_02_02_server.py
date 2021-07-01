@@ -20,7 +20,7 @@ async def huston(websocket, path):
         if "yes" in message.lower():
             click.secho(">> begin countdown")
             for i in reversed(range(1, 11)):
-                await websocket.send(f"\n\n\n>>   Taking of in: {i}")
+                await websocket.send(f"\n\n\n>>   Taking off in: {i}")
                 await asyncio.sleep(0.8)
         with suppress(Exception):
             await blastoff(websocket)
