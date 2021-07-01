@@ -27,6 +27,4 @@ async def chat():
     return await render_template("chat.html")
 
 
-# export QUART_APP=chat_app:app
-# quart run -h localhost -p 3000
-app.run(use_reloader=True)
+app.run(use_reloader=True, port=3000)
