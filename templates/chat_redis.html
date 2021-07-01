@@ -41,7 +41,7 @@
     <script>
     const wsProtocol = window.location.protocol === "https:"? "wss" : "ws";
     const ws = new WebSocket(`${wsProtocol}://${window.location.host}/ws`)
-    const sendMessageFrm = document.querySelector('#send-message');
+    const sendMessageForm = document.querySelector('#send-message');
     function appendMessage (m) {
         console.log(m.data);
         const message = JSON.parse(m.data);
@@ -59,12 +59,14 @@
     function sendMessage (e) {
         e.preventDefault();
         const handle = document.querySelector("#handle").value;
-        const message = document.querySelector("#message").value;
-        ws.send(JSON.stringify({handle, message}));    
+        const messageInput = document.querySelector("#message");
+        const message = messageInput.value;
+        ws.send(JSON.stringify({handle, message}));  
+        messageInput.value = ""; 
     }
     ws.onmessage = appendMessage
 
-    sendMessageFrm.addEventListener("submit", sendMessage);
+    sendMessageForm.addEventListener("submit", sendMessage);
     </script>
 </body>
 </html>
