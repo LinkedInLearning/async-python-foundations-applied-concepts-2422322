@@ -42,7 +42,7 @@ class Chat:
         for message in message_jsons:
             message_dictionary = json.loads(message)
             messages.append(message_dictionary)
-            
+
         return messages
 
     async def get_name(self):
