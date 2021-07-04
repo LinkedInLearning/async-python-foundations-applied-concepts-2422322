@@ -17,7 +17,7 @@ urls = [
     "http://httpbin.org/get?text=anything",
     "http://httpbin.org/get?text=with",
     "http://httpbin.org/get?text=it",
-] # 12 requests
+]  # 12 requests
 
 
 def get_args(url):
