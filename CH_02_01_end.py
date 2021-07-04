@@ -1,5 +1,5 @@
 from datetime import datetime
-from pprint import pp
+from pprint import pprint
 import asyncio
 
 import aiohttp
@@ -29,11 +29,15 @@ async def fetch_args(session, url):
 
 async def main():
     async with aiohttp.ClientSession() as session:
-        data = await asyncio.gather(*[fetch_args(session, url) for url in urls])
-        pp(data)
+        # create a collection of coroutines(can be done with comprehension )
+        fetch_coroutines = []
+        for url in urls:
+            fetch_coroutines.append(fetch_args(session, url))
+        # waik up coroutines with gather
+        data = await asyncio.gather(*fetch_coroutines)
+        pprint(data)
 
 
-loop = asyncio.get_event_loop()
 start = datetime.now()
-loop.run_until_complete(main())
+asyncio.run(main())
 click.secho(f"{datetime.now()-start}", bold=True, bg="blue", fg="white")
