@@ -1,5 +1,5 @@
 from datetime import datetime
-from pprint import pp
+from pprint import pprint
 
 import click
 import requests
@@ -25,5 +25,5 @@ def get_args(url):
 
 
 start = datetime.now()
-pp([get_args(url) for url in urls])
+pprint([get_args(url) for url in urls])
 click.secho(f"{datetime.now()-start}", bold=True, bg="blue", fg="white")
