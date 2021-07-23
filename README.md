@@ -5,11 +5,12 @@
 
 These exersice files are to be used in conjuction with the course "Async Python" on  [LinkedIn Learning](https://www.linkedin.com/learning)
 
-# Downloads
+## Local setup
+## Downloads
 * Visit [python.org](https://www.python.org/) and download Python for your operating system.
 * Visit [redis.io](https://redis.io/download) and download Redis for your operating system.
 
-# Setting up a vertual environment.
+## Setting up a vertual environment.
 1. Create a virtual environmet with the following command:
    ```bash
    python3 -m venv venv
@@ -29,7 +30,7 @@ These exersice files are to be used in conjuction with the course "Async Python"
    pip install -r requirements.txt
    ```
 
-# Every time you start a terminal session
+## Every time you start a terminal session
 1. Navigate to the course directory
 
 1. Activate the vertual environment:
@@ -43,7 +44,7 @@ These exersice files are to be used in conjuction with the course "Async Python"
    ```
  
  
-# Running a single exercise file.
+## Running a single exercise file.
 > :warning: *Make sure that you have set up your environment according to the instructions above*
 
 1. Python
