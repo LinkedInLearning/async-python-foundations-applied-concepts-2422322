@@ -1,4 +1,5 @@
 # Async Python
+These exersice files are to be used in conjuction with the course "Async Python" on LinkedIn Learning
 
 ## Easy setup with gitpod(cloud workspace)
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/from-referrer)
