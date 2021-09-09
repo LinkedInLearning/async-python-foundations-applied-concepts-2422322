@@ -1,5 +1,9 @@
-# Async Python
-These exercise files are to be used in conjunction with the course Async Python Foundations: Applied Concepts on LinkedIn Learning.
+# Async Python Foundations: Applied Concepts
+This is the repository for the LinkedIn Learning course Async Python Foundations: Applied Concepts. The full course is available from [LinkedIn Learning][lil-course-url].
+
+![Async Python Foundations: Applied Concepts][lil-thumbnail-url] 
+
+If you were cooking a multicourse meal, would you prep one thing at a time? Put bread in the oven, wait. Warm the soup on the stove, wait. Then the main course. Wouldn’t it be more efficient to spend time prepping other food instead of waiting on tasks that don’t need your immediate attention? In the same way that having multiple things happen at the same time leads to faster meal prep, having multiple things happen in Python—or using an asynchronous approach—can be leveraged to boost application performance and make your Python programs extremely efficient. In this course, Ronnie Sheer gives you the tools to use async Python to solve real-world problems, gain familiarity with the async Python ecosystem, complete challenges with working examples, and become a more attractive candidate for engineering positions. If you’re an experienced Python user looking to take async Python from theory to practice, check out this hands-on course.
 
 ## Easy setup with Gitpod (cloud workspace).
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#/https://github.com/LinkedInLearning/async-python-foundations-applied-concepts-2422322)
@@ -53,5 +57,14 @@ These exercise files are to be used in conjunction with the course Async Python 
    ```bash
    redis-server
    ```
+   
+   
+### Instructor
 
+Ronnie Sheer                            
+
+Check out my other courses on [LinkedIn Learning](https://www.linkedin.com/learning/instructors/ronnie-sheer).
+
+[lil-course-url]: https://www.linkedin.com/learning/async-python-foundations-applied-concepts
+[lil-thumbnail-url]: https://cdn.lynda.com/course/2422322/2422322-1630605594091-16x9.jpg
 
