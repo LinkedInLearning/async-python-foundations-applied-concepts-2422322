@@ -34,7 +34,7 @@ async def main():
     chat_db = Chat("messages")
     await chat_db.start_db()
     await chat_db.save_message({"handle": "first_user", "message": "hey"})
-    await chat_db.save_message({"handle": "first_user", "message": "hey"})
+    await chat_db.save_message({"handle": "second_user", "message": "hey"})
     await chat_db.save_message({"handle": "second_user", "message": "What's up?"})
     await chat_db.save_message({"handle": "first_user", "message": "all good!"})
 
