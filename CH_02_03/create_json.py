@@ -28,7 +28,7 @@ async def main():
         TODO
         1. use 'await asyncio.gather' and 'fetch' to get repo names and avatar_urls
         2. use 'write_to_file' to create a json file with the results
-        3. text your code
+        3. test your code
             a. 'cd CH_02_03'
             b. 'python -m http.server'
         NOTE: Feel free to use CH_02_01_end.py for reference.
