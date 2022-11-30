@@ -33,7 +33,7 @@ async def main():
         fetch_coroutines = []
         for url in urls:
             fetch_coroutines.append(fetch_args(session, url))
-        # waik up coroutines with gather
+        # wake up coroutines with gather
         data = await asyncio.gather(*fetch_coroutines)
         pprint(data)
 
